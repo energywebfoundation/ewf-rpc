@@ -16,8 +16,8 @@ PARITY_VERSION="parity/parity:v2.5.13-stable"
 DOCKER_COMPOSE_VERSION="1.25.4"
 
 # Chain/Parity configuration
-CHAINNAME="Volta"
-CHAINSPEC_URL="https://raw.githubusercontent.com/energywebfoundation/ewf-chainspec/master/Volta.json"
+CHAINNAME="EnergyWebChain"
+CHAINSPEC_URL="https://raw.githubusercontent.com/energywebfoundation/ewf-chainspec/master/EnergyWebChain.json"
 
 # Collecting information from the user
 

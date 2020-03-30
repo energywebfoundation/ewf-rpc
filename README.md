@@ -21,6 +21,8 @@ EWC and Volta RPC node installation scripts.
 1. Connect to the host and download choosen installation script:
 
     - Volta: `wget -O install-rpc.bash https://raw.githubusercontent.com/energywebfoundation/ewf-rpc/master/volta-rpc/install-rpc-ubuntu-server-18.04-volta.bash`
+    
+    - EWC: `wget -O install-rpc.bash https://raw.githubusercontent.com/energywebfoundation/ewf-rpc/master/ewc-rpc/install-rpc-ubuntu-server-18.04-ewc.bash`
 
 1. Run installation script in selected option
 
