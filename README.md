@@ -50,3 +50,7 @@ After certificate change nginx container restart is required, so please run belo
 Additionally verify if nginx started correctly and we do not have any errors related to that certificates in logs
 
 `docker-compose logs --tail 50 web`
+
+## Maintainers
+
+**Primary:** Kamil Rosenberger (@Berger91)

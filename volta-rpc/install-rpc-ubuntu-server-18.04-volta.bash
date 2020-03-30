@@ -106,12 +106,6 @@ services:
     volumes:
       - ./config:/parity/config:ro
       - ./chain-data:/home/parity/.local/share/io.parity.ethereum/
-    ports:
-      - 30303:30303
-      - 30303:30303/udp
-      - 8545:8545
-      - 8546:8546
-      - 8545:8545/udp
   web:
     image: nginx:stable
     restart: always
@@ -224,9 +218,8 @@ EOF
 chmod 644 config/parity.toml
 }
 
-function writeNginxConfig {
-if [ "$1" = "HTTPS" ] ; then
-  cat > ./nginx.conf << 'EOF'
+function writeNginxConfig-HTTPS {
+cat > ./nginx.conf << 'EOF'
 user  nginx;
 worker_processes  4;
 
@@ -289,8 +282,10 @@ http {
 }
 
 EOF
-else
-  cat > ./nginx.conf << 'EOF'
+}
+
+function writeNginxConfig-HTTP {
+cat > ./nginx.conf << 'EOF'
 user  nginx;
 worker_processes  4;
 
@@ -344,7 +339,6 @@ http {
 }
 
 EOF
-fi
 }
 
 function generateDummySSL {
@@ -394,14 +388,13 @@ function install {
   writeParityConfig
 
   echo "Fetch Chainspec..."
-  # TODO: replace with chainspec location
   wget $CHAINSPEC_URL -O config/chainspec.json
   
   # Generate Dummy ssl to start composition
   generateDummySSL
 
   # Write nginx basic config
-  writeNginxConfig $SSL_OPTION
+  writeNginxConfig-$SSL_OPTION
 
   # Write the docker-compose  & .env file to disk
   writeDockerCompose
