@@ -184,7 +184,6 @@ port = 8545
 interface = "0.0.0.0"
 cors = ["all"]
 apis = ["eth", "net", "parity","web3"]
-processing_threads = 24
 server_threads = 48
 
 [websockets]
