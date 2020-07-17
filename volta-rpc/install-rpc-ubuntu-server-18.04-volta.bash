@@ -12,7 +12,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 CURRENT_BASE_DIR="${PWD}"
 
 # Configuration Block - Docker checksums are the image Id
-PARITY_VERSION="parity/parity:v2.7.2-stable"
+PARITY_VERSION="parity/parity:v2.5.13-stable"
 DOCKER_COMPOSE_VERSION="1.25.4"
 
 # Chain/Parity configuration
