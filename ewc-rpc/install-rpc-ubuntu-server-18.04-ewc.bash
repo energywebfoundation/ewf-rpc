@@ -12,7 +12,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 CURRENT_BASE_DIR="${PWD}"
 
 # Configuration Block - Docker checksums are the image Id
-PARITY_VERSION="parity/parity:v2.5.13-stable"
+PARITY_VERSION="openethereum/openethereum:v3.2.5"
 DOCKER_COMPOSE_VERSION="1.25.4"
 
 # Chain/Parity configuration
@@ -105,7 +105,7 @@ services:
 
     volumes:
       - ./config:/parity/config:ro
-      - ./chain-data:/home/parity/.local/share/io.parity.ethereum/
+      - ./chain-data:/home/openethereum/.local/share/io.parity.ethereum/
   web:
     image: nginx:stable
     restart: always
@@ -170,13 +170,7 @@ function writeParityConfig {
 cat > config/parity.toml << EOF
 [parity]
 chain = "/parity/config/chainspec.json"
-auto_update = "none"
-release_track = "current"
-no_download = true
 no_persistent_txqueue = true
-
-[ui]
-disable = true
 
 [rpc]
 disable = false
@@ -189,6 +183,7 @@ server_threads = 48
 [websockets]
 disable = false
 interface = "0.0.0.0"
+port = 8546
 
 [ipc]
 disable = true
@@ -205,14 +200,13 @@ warp = false
 allow_ips = "all"
 snapshot_peers = 0
 max_pending_peers = 64
-no_serve_light = false
 reserved_peers = "/parity/config/peers"
 
 [footprint]
 db_compaction = "ssd"
 
 [snapshots]
-disable_periodic = false
+enable = false
 EOF
 chmod 644 config/parity.toml
 }
