@@ -206,7 +206,7 @@ reserved_peers = "/parity/config/peers"
 db_compaction = "ssd"
 
 [snapshots]
-enable = false
+enable = true
 EOF
 chmod 644 config/parity.toml
 }
