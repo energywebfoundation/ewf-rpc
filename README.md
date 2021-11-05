@@ -11,7 +11,7 @@ EWC and Volta RPC node installation scripts.
       - OS: Ubuntu Server 18.04
       - CPU: 2
       - RAM: 4GB
-      - Hard drive: minimum 60GB at this moment
+      - Hard drive: minimum 90GB at this moment
 
     Network security recommendations:
       - Incoming SSH connection only from specific IPS or via VPN.
@@ -35,7 +35,7 @@ EWC and Volta RPC node installation scripts.
       In this configuration we receive RPC with self-signed certificate which is not allowed by most browsers.
       Here afer installation user is obligated to provide his own certificates.
 
-1. Now we have to wait till validator will be fully synced
+1. Now we have to wait till rpc will be fully synced
 
 ## HTTPS Certificate Informations
 
@@ -55,4 +55,4 @@ Additionally verify if nginx started correctly and we do not have any errors rel
 
 ## Maintainers
 
-**Primary:** Kamil Rosenberger (@Berger91)
+**Primary:** Kiran Roy, Kamil Witkowski
