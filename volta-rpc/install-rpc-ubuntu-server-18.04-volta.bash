@@ -12,7 +12,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 CURRENT_BASE_DIR="${PWD}"
 
 # Configuration Block - Docker checksums are the image Id
-PARITY_VERSION="openethereum/openethereum:v3.2.5"
+PARITY_VERSION="openethereum/openethereum:v3.3.0-rc.11"
 DOCKER_COMPOSE_VERSION="1.25.4"
 
 # Chain/Parity configuration
