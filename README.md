@@ -18,13 +18,17 @@ EWC and Volta RPC node installation scripts.
       - Incoming HTTP/HTTPS connections via ports 80/443 (Can be limitated to specific locations depending on your needs)
       - Open outgoing connection to the internet. Node should be regulary updated and have to be connected to the blockchain network.
 
-1. Connect to the host and download choosen installation script:
+2. Connect to the host and download choosen installation script:
 
     - Volta: `wget -O install-rpc.bash https://raw.githubusercontent.com/energywebfoundation/ewf-rpc/master/volta-rpc/install-rpc-ubuntu-server-18.04-volta.bash`
     
     - EWC: `wget -O install-rpc.bash https://raw.githubusercontent.com/energywebfoundation/ewf-rpc/master/ewc-rpc/install-rpc-ubuntu-server-18.04-ewc.bash`
+    
+3. The following script can also be used if you would like to install in any platform. Presently it supports the following platform: Ubuntu, Debian, CentOS 
+   - Volta: https://github.com/energywebfoundation/ewf-rpc/blob/master/volta-rpc/install-rpc-volta.bash
+   - EWC: https://github.com/energywebfoundation/ewf-rpc/blob/master/ewc-rpc/install-rpc-ewc.bash
 
-1. Run installation script in selected option
+4. Run installation script in selected option
 
     - Basic possibility with HTTP Only: `sudo bash install-rpc.bash install-http`
 
@@ -35,7 +39,7 @@ EWC and Volta RPC node installation scripts.
       In this configuration we receive RPC with self-signed certificate which is not allowed by most browsers.
       Here afer installation user is obligated to provide his own certificates.
 
-1. Now we have to wait till rpc will be fully synced
+5. Now we have to wait till rpc will be fully synced
 
 ## HTTPS Certificate Informations
 
