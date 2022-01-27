@@ -139,16 +139,31 @@ services:
       - "${NGINX_KEY}:/etc/nginx/nginx.key:ro"
 EOF
 
+chmod 640 docker-compose.yml
+}
+
+function writeENV-HTTPS {
 cat > .env << EOF
 # Parity
 PARITY_VERSION=$PARITY_VERSION
 # Nginx
 NGINX_CERT=./nginx.crt
 NGINX_KEY=./nginx.key
+PORT=443
 EOF
-
 chmod 640 .env
-chmod 640 docker-compose.yml
+}
+
+function writeENV-HTTP {
+cat > .env << EOF
+# Parity
+PARITY_VERSION=$PARITY_VERSION
+# Nginx
+NGINX_CERT=./nginx.crt
+NGINX_KEY=./nginx.key
+PORT=80
+EOF
+chmod 640 .env
 }
 
 function writeSSHConfig {
@@ -378,9 +393,9 @@ function install {
   if cat /etc/*release | grep ^NAME | grep Ubuntu  ||  cat /etc/*release | grep ^NAME | grep Debian; then
     setLocales
   fi
+
   installDependencies
-  # Get external IP from OpenDNS
-  EXTERNAL_IP="$(dig @resolver1.opendns.com ANY myip.opendns.com +short)"
+  # Install Docker & Docker-Compose
   installDocker
 
   # Secure SSH by disable password login and only allowing login as user with keys.
@@ -389,7 +404,6 @@ function install {
   systemctl restart sshd
   #DNS & DHCP
   networkConfiguration
-  # Install Docker & Docker-Compose
   # Write docker config
   writeDockerConfig
   service docker restart
@@ -415,10 +429,13 @@ function install {
 
   # Write the docker-compose  & .env file to disk
   writeDockerCompose
+  writeENV-"$SSL_OPTION"
 
   # start everything up
   docker-compose up -d
 
+  # Get external IP from OpenDNS
+  EXTERNAL_IP="$(dig @resolver1.opendns.com ANY myip.opendns.com +short)"
 
   # Print install summary
   cd "$CURRENT_BASE_DIR"
