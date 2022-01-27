@@ -139,16 +139,31 @@ services:
       - "${NGINX_KEY}:/etc/nginx/nginx.key:ro"
 EOF
 
+chmod 640 docker-compose.yml
+}
+
+function writeENV-HTTPS {
 cat > .env << EOF
 # Parity
 PARITY_VERSION=$PARITY_VERSION
 # Nginx
 NGINX_CERT=./nginx.crt
 NGINX_KEY=./nginx.key
+PORT=443
 EOF
-
 chmod 640 .env
-chmod 640 docker-compose.yml
+}
+
+function writeENV-HTTP {
+cat > .env << EOF
+# Parity
+PARITY_VERSION=$PARITY_VERSION
+# Nginx
+NGINX_CERT=./nginx.crt
+NGINX_KEY=./nginx.key
+PORT=80
+EOF
+chmod 640 .env
 }
 
 function writeSSHConfig {
@@ -379,9 +394,6 @@ function install {
     setLocales
   fi
   installDependencies
-  # Get external IP from OpenDNS
-  EXTERNAL_IP="$(dig @resolver1.opendns.com ANY myip.opendns.com +short)"
-  installDocker
 
   # Secure SSH by disable password login and only allowing login as user with keys.
   echo "Securing SSH..."
@@ -415,10 +427,13 @@ function install {
 
   # Write the docker-compose  & .env file to disk
   writeDockerCompose
+  writeENV-"$SSL_OPTION"
 
   # start everything up
   docker-compose up -d
 
+  # Get external IP from OpenDNS
+  EXTERNAL_IP="$(dig @resolver1.opendns.com ANY myip.opendns.com +short)"
 
   # Print install summary
   cd "$CURRENT_BASE_DIR"
