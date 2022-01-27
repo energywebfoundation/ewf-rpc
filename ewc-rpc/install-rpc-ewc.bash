@@ -393,7 +393,10 @@ function install {
   if cat /etc/*release | grep ^NAME | grep Ubuntu  ||  cat /etc/*release | grep ^NAME | grep Debian; then
     setLocales
   fi
+
   installDependencies
+  # Install Docker & Docker-Compose
+  installDocker
 
   # Secure SSH by disable password login and only allowing login as user with keys.
   echo "Securing SSH..."
@@ -401,7 +404,6 @@ function install {
   systemctl restart sshd
   #DNS & DHCP
   networkConfiguration
-  # Install Docker & Docker-Compose
   # Write docker config
   writeDockerConfig
   service docker restart
